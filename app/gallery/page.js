@@ -5,8 +5,6 @@ import {
   Box,
   Container,
   Typography,
-  ImageList,
-  ImageListItem,
   Tabs,
   Tab,
   Dialog,
@@ -14,8 +12,8 @@ import {
 } from '@mui/material';
 import { Close } from '@mui/icons-material';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useTheme } from '@mui/material/styles';
 import Header from '../../components/Header';
+import PageHero from '../../components/PageHero';
 import Footer from '../../components/Footer';
 
 const galleryImages = {
@@ -46,7 +44,6 @@ const galleryImages = {
 };
 
 export default function GalleryPage() {
-  const theme = useTheme();
   const [activeTab, setActiveTab] = useState(0);
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -56,80 +53,45 @@ export default function GalleryPage() {
   return (
     <>
       <Header />
-      
-      {/* Hero Section */}
-      <Box
-        sx={{
-          backgroundColor: 'primary.main',
-          color: 'white',
-          py: { xs: 8, md: 12 },
-          backgroundImage: 'url(https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1920&q=80)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          position: 'relative',
-          '&::before': {
-            content: '""',
-            position: 'absolute',
-            inset: 0,
-            backgroundColor: 'rgba(43, 58, 108, 0.92)',
-          },
-        }}
-      >
-        <Container maxWidth="lg" sx={{ position: 'relative' }}>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-          >
-            <Typography
-              variant="h1"
-              sx={{
-                fontFamily: 'var(--font-playfair)',
-                fontSize: { xs: '2.5rem', md: '4rem' },
-                fontWeight: 900,
-                mb: 2,
-              }}
-            >
-              Photo Gallery
-            </Typography>
-            <Typography
-              variant="h5"
-              sx={{
-                maxWidth: 600,
-                opacity: 0.9,
-                fontWeight: 300,
-              }}
-            >
-              Capturing moments, preserving memories from our alumni community
-            </Typography>
-          </motion.div>
-        </Container>
-      </Box>
+
+      <PageHero
+        eyebrow="Memories"
+        title="Photo Gallery"
+        description="Capturing moments, preserving memories from our alumni community"
+        image="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1920&q=80"
+      />
 
       {/* Gallery Content */}
       <Box sx={{ py: { xs: 6, md: 10 }, backgroundColor: 'background.default' }}>
         <Container maxWidth="lg">
           {/* Tabs */}
-          <Box sx={{ mb: 4, borderBottom: 1, borderColor: 'divider' }}>
+          <Box sx={{ mb: { xs: 4, md: 5 }, borderBottom: '1px solid rgba(43, 58, 108, 0.1)' }}>
             <Tabs
               value={activeTab}
               onChange={(e, newValue) => setActiveTab(newValue)}
+              slotProps={{ indicator: { sx: { backgroundColor: 'secondary.main', height: 3, borderRadius: '3px 3px 0 0' } } }}
               sx={{
+                minHeight: 48,
                 '& .MuiTab-root': {
-                  fontWeight: 600,
-                  fontSize: '1rem',
-                  textTransform: 'capitalize',
-                  minWidth: 120,
+                  textTransform: 'none',
+                  fontFamily: 'inherit',
+                  fontWeight: 700,
+                  fontSize: '0.9375rem',
+                  color: 'text.secondary',
+                  minHeight: 48,
+                  px: 0,
+                  mr: 4,
                 },
+                '& .Mui-selected': { color: 'primary.main !important' },
               }}
             >
-              <Tab label="Events" />
-              <Tab label="Projects" />
-              <Tab label="School Life" />
+              <Tab label="Events" disableRipple />
+              <Tab label="Projects" disableRipple />
+              <Tab label="School Life" disableRipple />
             </Tabs>
           </Box>
 
-          {/* Image Grid */}
+          {/* Polaroid Grid */}
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab}
@@ -138,71 +100,73 @@ export default function GalleryPage() {
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.4 }}
             >
-              <ImageList
-                variant="masonry"
-                cols={3}
-                gap={16}
+              <Box
                 sx={{
-                  '@media (max-width: 900px)': {
-                    gridTemplateColumns: 'repeat(2, 1fr) !important',
+                  display: 'grid',
+                  gridTemplateColumns: {
+                    xs: 'repeat(2, 1fr)',
+                    sm: 'repeat(3, 1fr)',
+                    md: 'repeat(4, 1fr)',
                   },
-                  '@media (max-width: 600px)': {
-                    gridTemplateColumns: 'repeat(1, 1fr) !important',
-                  },
+                  gap: { xs: 3, md: 4 },
                 }}
               >
                 {currentImages.map((item, index) => (
-                  <ImageListItem
-                    key={item.src}
-                    component={motion.div}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
+                  <motion.div
+                    key={item.src + item.title}
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: index * 0.05 }}
-                    onClick={() => setSelectedImage(item)}
-                    sx={{
-                      cursor: 'pointer',
-                      overflow: 'hidden',
-                      borderRadius: 2,
-                      transition: 'all 0.3s',
-                      '&:hover': {
-                        transform: 'scale(1.03)',
-                        boxShadow: theme.shadows[8],
-                      },
-                    }}
                   >
-                    <img
-                      src={item.src}
-                      alt={item.title}
-                      loading="lazy"
-                      style={{
-                        width: '100%',
-                        height: 'auto',
-                        display: 'block',
-                      }}
-                    />
                     <Box
+                      onClick={() => setSelectedImage(item)}
                       sx={{
-                        position: 'absolute',
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
-                        background: 'linear-gradient(to top, rgba(0,0,0,0.7), transparent)',
-                        color: 'white',
-                        p: 2,
-                        opacity: 0,
-                        transition: 'opacity 0.3s',
+                        cursor: 'pointer',
+                        backgroundColor: '#ffffff',
+                        border: '1px solid rgba(43, 58, 108, 0.1)',
+                        borderRadius: '4px',
+                        boxShadow: '0 6px 20px rgba(12, 17, 36, 0.08)',
+                        p: 1.25,
+                        pb: 2.5,
+                        transition: 'border-color 0.25s ease, box-shadow 0.25s ease',
                         '&:hover': {
-                          opacity: 1,
+                          borderColor: 'rgba(43, 58, 108, 0.22)',
+                          boxShadow: '0 10px 28px rgba(12, 17, 36, 0.12)',
                         },
                       }}
                     >
-                      <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                      <Box sx={{ overflow: 'hidden', borderRadius: '2px', aspectRatio: '1 / 1' }}>
+                        <Box
+                          component="img"
+                          src={item.src}
+                          alt={item.title}
+                          loading="lazy"
+                          sx={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                            display: 'block',
+                            transition: 'transform 0.6s ease',
+                            '&:hover': { transform: 'scale(1.04)' },
+                          }}
+                        />
+                      </Box>
+                      <Typography
+                        variant="body2"
+                        sx={{
+                          mt: 1.5,
+                          textAlign: 'center',
+                          color: 'text.primary',
+                          fontWeight: 700,
+                          fontSize: '0.8125rem',
+                        }}
+                      >
                         {item.title}
                       </Typography>
                     </Box>
-                  </ImageListItem>
+                  </motion.div>
                 ))}
-              </ImageList>
+              </Box>
             </motion.div>
           </AnimatePresence>
         </Container>
@@ -212,52 +176,53 @@ export default function GalleryPage() {
       <Dialog
         open={Boolean(selectedImage)}
         onClose={() => setSelectedImage(null)}
-        maxWidth="lg"
+        maxWidth="md"
         fullWidth
-        PaperProps={{
-          sx: {
-            backgroundColor: 'transparent',
-            boxShadow: 'none',
+        slotProps={{
+          paper: {
+            sx: {
+              backgroundColor: '#ffffff',
+              borderRadius: '4px',
+              p: 1.5,
+              pb: 3,
+            },
           },
         }}
       >
-        <Box
-          sx={{
-            position: 'relative',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            p: 2,
-          }}
-        >
+        <Box sx={{ position: 'relative' }}>
           <IconButton
             onClick={() => setSelectedImage(null)}
             sx={{
               position: 'absolute',
-              top: 16,
-              right: 16,
-              backgroundColor: 'rgba(255, 255, 255, 0.9)',
-              '&:hover': {
-                backgroundColor: 'white',
-              },
+              top: 8,
+              right: 8,
+              backgroundColor: 'rgba(255, 255, 255, 0.92)',
+              border: '1px solid rgba(43, 58, 108, 0.1)',
+              '&:hover': { backgroundColor: 'white' },
               zIndex: 1,
             }}
           >
             <Close />
           </IconButton>
           {selectedImage && (
-            <motion.img
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.3 }}
-              src={selectedImage.src}
-              alt={selectedImage.title}
-              style={{
-                maxWidth: '100%',
-                maxHeight: '90vh',
-                borderRadius: 8,
-              }}
-            />
+            <>
+              <Box sx={{ overflow: 'hidden', borderRadius: '2px' }}>
+                <motion.img
+                  initial={{ opacity: 0, scale: 0.96 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.3 }}
+                  src={selectedImage.src}
+                  alt={selectedImage.title}
+                  style={{ width: '100%', display: 'block' }}
+                />
+              </Box>
+              <Typography
+                variant="body1"
+                sx={{ mt: 2, textAlign: 'center', color: 'text.primary', fontWeight: 700 }}
+              >
+                {selectedImage.title}
+              </Typography>
+            </>
           )}
         </Box>
       </Dialog>

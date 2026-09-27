@@ -21,6 +21,7 @@ import {
 import { motion } from 'framer-motion';
 import { useTheme } from '@mui/material/styles';
 import Header from '../../components/Header';
+import PageHero from '../../components/PageHero';
 import Footer from '../../components/Footer';
 
 const upcomingEvents = [
@@ -87,54 +88,12 @@ export default function ActivitiesPage() {
     <>
       <Header />
       
-      {/* Hero Section */}
-      <Box
-        sx={{
-          backgroundColor: 'primary.main',
-          color: 'white',
-          py: { xs: 8, md: 12 },
-          backgroundImage: 'url(https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=1920&q=80)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          position: 'relative',
-          '&::before': {
-            content: '""',
-            position: 'absolute',
-            inset: 0,
-            backgroundColor: 'rgba(43, 58, 108, 0.92)',
-          },
-        }}
-      >
-        <Container maxWidth="lg" sx={{ position: 'relative' }}>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-          >
-            <Typography
-              variant="h1"
-              sx={{
-                fontFamily: 'var(--font-playfair)',
-                fontSize: { xs: '2.5rem', md: '4rem' },
-                fontWeight: 900,
-                mb: 2,
-              }}
-            >
-              Events & Activities
-            </Typography>
-            <Typography
-              variant="h5"
-              sx={{
-                maxWidth: 600,
-                opacity: 0.9,
-                fontWeight: 300,
-              }}
-            >
-              Stay connected through our vibrant calendar of alumni events and activities
-            </Typography>
-          </motion.div>
-        </Container>
-      </Box>
+      <PageHero
+        eyebrow="What's On"
+        title="Events & Activities"
+        description="Stay connected through our vibrant calendar of alumni events and activities"
+        image="https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=1920&q=80"
+      />
 
       {/* Upcoming Events */}
       <Box sx={{ py: { xs: 6, md: 10 }, backgroundColor: 'background.default' }}>
@@ -148,9 +107,6 @@ export default function ActivitiesPage() {
             <Typography
               variant="h2"
               sx={{
-                fontFamily: 'var(--font-playfair)',
-                fontSize: { xs: '2rem', md: '3rem' },
-                fontWeight: 900,
                 color: 'primary.main',
                 mb: 1,
               }}
@@ -191,11 +147,11 @@ export default function ActivitiesPage() {
                       flexDirection: { xs: 'column', sm: 'row' },
                       gap: 3,
                       p: 3,
-                      transition: 'all 0.3s',
+                      transition: 'border-color 0.25s ease, box-shadow 0.25s ease',
                       cursor: 'pointer',
                       '&:hover': {
-                        transform: 'translateX(8px)',
-                        boxShadow: theme.shadows[8],
+                        borderColor: 'rgba(43, 58, 108, 0.22)',
+                        boxShadow: '0 12px 32px rgba(12, 17, 36, 0.08)',
                       },
                     }}
                   >
@@ -204,32 +160,25 @@ export default function ActivitiesPage() {
                       sx={{
                         minWidth: 100,
                         height: 100,
-                        backgroundColor: 'secondary.main',
-                        borderRadius: 3,
+                        backgroundColor: 'rgba(43, 58, 108, 0.06)',
+                        borderTop: '3px solid',
+                        borderTopColor: 'secondary.main',
+                        borderRadius: '10px',
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        color: 'white',
+                        color: 'primary.main',
                         flexShrink: 0,
                       }}
                     >
-                      <Typography
-                        sx={{
-                          fontFamily: 'var(--font-playfair)',
-                          fontSize: '2.5rem',
-                          fontWeight: 700,
-                          lineHeight: 1,
-                        }}
+                      <Typography variant="stat"
                       >
                         {event.day}
                       </Typography>
                       <Typography
-                        variant="caption"
+                        variant="overline"
                         sx={{
-                          fontSize: '0.8rem',
-                          textTransform: 'uppercase',
-                          letterSpacing: '0.08em',
                           opacity: 0.9,
                         }}
                       >
@@ -238,7 +187,6 @@ export default function ActivitiesPage() {
                       <Typography
                         variant="caption"
                         sx={{
-                          fontSize: '0.7rem',
                           opacity: 0.8,
                         }}
                       >
@@ -268,9 +216,7 @@ export default function ActivitiesPage() {
                             <Typography
                               variant="h5"
                               sx={{
-                                fontWeight: 600,
                                 color: 'primary.main',
-                                fontSize: '1.25rem',
                               }}
                             >
                               {event.title}
@@ -281,8 +227,6 @@ export default function ActivitiesPage() {
                               sx={{
                                 backgroundColor: 'rgba(43, 58, 108, 0.1)',
                                 color: 'primary.main',
-                                fontWeight: 600,
-                                fontSize: '0.7rem',
                               }}
                             />
                           </Box>
@@ -291,7 +235,6 @@ export default function ActivitiesPage() {
                             sx={{
                               color: 'text.secondary',
                               mb: 2,
-                              lineHeight: 1.6,
                             }}
                           >
                             {event.description}
@@ -305,13 +248,13 @@ export default function ActivitiesPage() {
                           >
                             <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75 }}>
                               <LocationOn sx={{ fontSize: '1rem', color: 'text.secondary' }} />
-                              <Typography variant="body2" sx={{ color: 'text.secondary', fontSize: '0.875rem' }}>
+                              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
                                 {event.location}
                               </Typography>
                             </Box>
                             <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75 }}>
                               <Schedule sx={{ fontSize: '1rem', color: 'text.secondary' }} />
-                              <Typography variant="body2" sx={{ color: 'text.secondary', fontSize: '0.875rem' }}>
+                              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
                                 {event.time}
                               </Typography>
                             </Box>
@@ -351,9 +294,6 @@ export default function ActivitiesPage() {
             <Typography
               variant="h2"
               sx={{
-                fontFamily: 'var(--font-playfair)',
-                fontSize: { xs: '2rem', md: '3rem' },
-                fontWeight: 900,
                 color: 'primary.main',
                 mb: 1,
               }}
@@ -393,10 +333,10 @@ export default function ActivitiesPage() {
                 <Card
                   sx={{
                     height: '100%',
-                    transition: 'all 0.3s',
+                    transition: 'border-color 0.25s ease, box-shadow 0.25s ease',
                     '&:hover': {
-                      transform: 'translateY(-8px)',
-                      boxShadow: theme.shadows[8],
+                      borderColor: 'rgba(43, 58, 108, 0.22)',
+                      boxShadow: '0 12px 32px rgba(12, 17, 36, 0.08)',
                     },
                   }}
                 >
@@ -410,13 +350,9 @@ export default function ActivitiesPage() {
                   />
                   <CardContent sx={{ p: 3 }}>
                     <Typography
-                      variant="caption"
+                      variant="overline"
                       sx={{
                         color: 'secondary.main',
-                        fontWeight: 600,
-                        fontSize: '0.75rem',
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.08em',
                       }}
                     >
                       {event.date}
@@ -424,7 +360,6 @@ export default function ActivitiesPage() {
                     <Typography
                       variant="h6"
                       sx={{
-                        fontWeight: 600,
                         color: 'primary.main',
                         my: 1,
                       }}
@@ -435,7 +370,6 @@ export default function ActivitiesPage() {
                       variant="body2"
                       sx={{
                         color: 'text.secondary',
-                        lineHeight: 1.6,
                       }}
                     >
                       {event.description}

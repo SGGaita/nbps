@@ -12,23 +12,24 @@
 
 html {
   height: 100%;
-}
-
-html,
-body {
   max-width: 100vw;
   overflow-x: hidden;
 }
 
+/* Note: overflow-x is intentionally NOT set on body. Combined with the flex
+   column layout below, that would make body its own scroll container in
+   most browsers and silently break position:sticky (e.g. the header) for
+   everything inside it. */
 body {
   min-height: 100%;
+  max-width: 100vw;
   display: flex;
   flex-direction: column;
   color: var(--foreground);
   background: var(--background);
-  font-family: var(--font-dm-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: var(--font-body), -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue',
+    Arial, sans-serif;
+  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -37,6 +38,14 @@ body {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+}
+
+/* Native controls default to the OS font; make them follow the site's type */
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
 }
 
 a {

@@ -10,16 +10,11 @@ import {
   Divider,
 } from '@mui/material';
 import {
-  Facebook,
-  Twitter,
-  Instagram,
-  WhatsApp,
-  YouTube,
   Send as SendIcon,
   Email,
-  Phone,
   LocationOn,
 } from '@mui/icons-material';
+import { socialLinks } from './socialLinks';
 import { useTheme } from '@mui/material/styles';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -32,14 +27,12 @@ const footerLinks = {
     { label: 'Projects', href: '/projects' },
     { label: 'Gallery', href: '/gallery' },
     { label: 'Resources', href: '/resources' },
+    { label: 'Fitness', href: '/fitness' },
+    { label: 'Welfare', href: '/welfare' },
   ],
   getInvolved: [
     { label: 'Donate', href: '/donate' },
     { label: 'Register', href: '/register' },
-    { label: 'Volunteer', href: '#' },
-    { label: 'Sponsor a Project', href: '#' },
-    { label: 'Refer an Alumni', href: '#' },
-    { label: 'Contact Us', href: '#' },
   ],
 };
 
@@ -69,32 +62,17 @@ export default function Footer() {
           <Box sx={{ flex: '2 1 280px', minWidth: 0 }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 2 }}>
               <Box
-                sx={{
-                  width: 40,
-                  height: 40,
-                  backgroundColor: theme.palette.secondary.main,
-                  borderRadius: 2,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                <Typography
-                  sx={{
-                    fontFamily: 'var(--font-playfair)',
-                    fontSize: '1rem',
-                    fontWeight: 900,
-                    color: 'white',
-                  }}
-                >
-                  NB
-                </Typography>
-              </Box>
+                component="img"
+                src="/logo-mark.png"
+                alt="NBPS Alumni crest"
+                sx={{ width: 40, height: 'auto', display: 'block' }}
+              />
               <Typography
                 variant="h6"
                 sx={{
-                  fontFamily: 'var(--font-playfair)',
                   color: 'white',
+                  fontWeight: 700,
+                  fontSize: '1.125rem',
                 }}
               >
                 NBPS Alumni
@@ -106,13 +84,12 @@ export default function Footer() {
                 mb: 2,
                 maxWidth: 280,
                 color: 'rgba(255, 255, 255, 0.5)',
-                lineHeight: 1.75,
               }}
             >
-              Nyandarua Boarding Primary School Alumni Association — uniting graduates, empowering communities, and honoring our heritage in Nyandarua County, Kenya.
+              The NBPS Alumni Association brings together former students of Nyandarua Boarding Primary School, united by a shared history, lasting friendships and a desire to give back to the NBPS community.
             </Typography>
             <Box sx={{ display: 'flex', gap: 1 }}>
-              {[Facebook, Twitter, Instagram, WhatsApp, YouTube].map((Icon, index) => (
+              {socialLinks.map(({ icon: Icon, href, label }, index) => (
                 <motion.div
                   key={index}
                   whileHover={{ scale: 1.1 }}
@@ -120,6 +97,11 @@ export default function Footer() {
                 >
                   <IconButton
                     size="small"
+                    component="a"
+                    href={href}
+                    aria-label={label}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     sx={{
                       backgroundColor: 'rgba(255, 255, 255, 0.07)',
                       color: 'rgba(255, 255, 255, 0.5)',
@@ -140,14 +122,10 @@ export default function Footer() {
           {/* Navigate Links */}
           <Box sx={{ flex: '1 1 150px', minWidth: 0 }}>
             <Typography
-              variant="subtitle2"
+              variant="overline"
               sx={{
                 color: theme.palette.secondary.main,
-                textTransform: 'uppercase',
-                letterSpacing: '0.12em',
-                fontWeight: 600,
                 mb: 2,
-                fontSize: '0.8rem',
               }}
             >
               Navigate
@@ -175,14 +153,10 @@ export default function Footer() {
           {/* Get Involved Links */}
           <Box sx={{ flex: '1 1 150px', minWidth: 0 }}>
             <Typography
-              variant="subtitle2"
+              variant="overline"
               sx={{
                 color: theme.palette.secondary.main,
-                textTransform: 'uppercase',
-                letterSpacing: '0.12em',
-                fontWeight: 600,
                 mb: 2,
-                fontSize: '0.8rem',
               }}
             >
               Get Involved
@@ -210,14 +184,10 @@ export default function Footer() {
           {/* Newsletter Section */}
           <Box sx={{ flex: '1 1 250px', minWidth: 0 }}>
             <Typography
-              variant="subtitle2"
+              variant="overline"
               sx={{
                 color: theme.palette.secondary.main,
-                textTransform: 'uppercase',
-                letterSpacing: '0.12em',
-                fontWeight: 600,
                 mb: 2,
-                fontSize: '0.8rem',
               }}
             >
               Newsletter
@@ -227,8 +197,6 @@ export default function Footer() {
               sx={{
                 mb: 1.5,
                 color: 'rgba(255, 255, 255, 0.5)',
-                fontSize: '0.82rem',
-                lineHeight: 1.6,
               }}
             >
               Get NBPS Alumni updates, event announcements, and project news delivered to your inbox.
@@ -248,7 +216,7 @@ export default function Footer() {
                     },
                     '& input': {
                       color: 'white',
-                      fontSize: '0.82rem',
+                      fontSize: '0.875rem',
                     },
                     '&:hover fieldset': {
                       borderColor: 'rgba(255, 255, 255, 0.2)',
@@ -272,22 +240,17 @@ export default function Footer() {
             {/* Contact Info */}
             <Box sx={{ mt: 3 }}>
               <Typography
-                variant="subtitle2"
+                variant="overline"
                 sx={{
                   color: theme.palette.secondary.main,
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.12em',
-                  fontWeight: 600,
                   mb: 1.5,
-                  fontSize: '0.8rem',
                 }}
               >
                 Contact
               </Typography>
               <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
                 {[
-                  { icon: Email, text: 'info@nbpsalumni.co.ke' },
-                  { icon: Phone, text: '+254 700 000 000' },
+                  { icon: Email, text: 'alumninbps@gmail.com' },
                   { icon: LocationOn, text: 'Nyandarua County, Kenya' },
                 ].map((item, index) => (
                   <Box key={index} sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
@@ -296,7 +259,6 @@ export default function Footer() {
                       variant="caption"
                       sx={{
                         color: 'rgba(255, 255, 255, 0.45)',
-                        fontSize: '0.78rem',
                       }}
                     >
                       {item.text}
@@ -313,10 +275,8 @@ export default function Footer() {
         <Box
           sx={{
             display: 'flex',
-            justifyContent: 'space-between',
+            justifyContent: 'center',
             alignItems: 'center',
-            flexWrap: 'wrap',
-            gap: 2,
             pb: 3,
           }}
         >
@@ -324,26 +284,10 @@ export default function Footer() {
             variant="caption"
             sx={{
               color: 'rgba(255, 255, 255, 0.35)',
-              fontSize: '0.75rem',
             }}
           >
-            © 2025 NBPS Alumni Association. All rights reserved.
+            © {new Date().getFullYear()} NBPS Alumni Association. All rights reserved.
           </Typography>
-          <Box sx={{ display: 'flex', gap: 2 }}>
-            {['Privacy Policy', 'Terms of Use'].map((text) => (
-              <Link
-                key={text}
-                href="#"
-                style={{
-                  textDecoration: 'none',
-                  color: 'rgba(255, 255, 255, 0.35)',
-                  fontSize: '0.75rem',
-                }}
-              >
-                {text}
-              </Link>
-            ))}
-          </Box>
         </Box>
       </Container>
     </Box>

@@ -1,23 +1,9 @@
 'use client';
 
 import { useRef } from 'react';
-import {
-  Box,
-  Container,
-  Typography,
-  Card,
-  CardContent,
-  Button,
-  Chip,
-} from '@mui/material';
-import {
-  CalendarMonth,
-  LocationOn,
-  Schedule,
-  ArrowForward,
-} from '@mui/icons-material';
+import { Box, Container, Typography, Card, Button } from '@mui/material';
+import { LocationOn, Schedule, ArrowForward, Groups } from '@mui/icons-material';
 import { motion, useInView } from 'framer-motion';
-import { useTheme } from '@mui/material/styles';
 
 const events = [
   {
@@ -26,15 +12,17 @@ const events = [
     title: 'Annual General Meeting (AGM) 2025',
     location: 'Nyandarua County Hall',
     time: '10:00 AM',
-    color: 'primary',
+    category: 'Meeting',
+    image: null,
   },
   {
     day: '03',
     month: 'May',
-    title: 'Alumni Fun Day 2025 🎉',
+    title: 'Alumni Fun Day 2025',
     location: 'NBPS Grounds',
-    time: '9:00 AM – 6:00 PM',
-    color: 'secondary',
+    time: '9:00 AM - 6:00 PM',
+    category: 'Social',
+    image: '/hero/fun-day.jpg',
   },
   {
     day: '17',
@@ -42,23 +30,17 @@ const events = [
     title: 'Health & Fitness Walk/Run Challenge',
     location: 'Nyahururu Town',
     time: '6:00 AM',
-    color: 'info',
+    category: 'Fitness',
+    image: '/hero/fitness.jpg',
   },
 ];
 
 export default function EventsSection() {
-  const theme = useTheme();
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <Box
-      ref={ref}
-      sx={{
-        backgroundColor: '#f0ead8',
-        py: { xs: 6, md: 10 },
-      }}
-    >
+    <Box ref={ref} sx={{ backgroundColor: '#f0ead8', py: { xs: 8, md: 11 } }}>
       <Container maxWidth="lg">
         {/* Header */}
         <motion.div
@@ -69,22 +51,12 @@ export default function EventsSection() {
           <Typography
             variant="overline"
             sx={{
-              color: 'secondary.main',
-              fontFamily: 'var(--font-dm-mono)',
-              fontSize: '0.72rem',
-              fontWeight: 500,
-              letterSpacing: '0.15em',
+              color: 'secondary.dark',
               display: 'flex',
               alignItems: 'center',
               gap: 1.5,
               mb: 1.5,
-              '&::before': {
-                content: '""',
-                width: 30,
-                height: 2,
-                backgroundColor: 'secondary.main',
-                borderRadius: 1,
-              },
+              '&::before': { content: '""', width: 30, height: 2, backgroundColor: 'secondary.main' },
             }}
           >
             Stay Connected
@@ -96,141 +68,128 @@ export default function EventsSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          <Typography
-            variant="h2"
-            sx={{
-              fontFamily: 'var(--font-playfair)',
-              fontSize: { xs: '2rem', md: '3rem' },
-              fontWeight: 900,
-              color: 'primary.main',
-              mb: 1,
-            }}
-          >
+          <Typography variant="h2" sx={{ color: 'primary.main', mb: 6 }}>
             Upcoming Events
           </Typography>
         </motion.div>
 
-        <Box
-          sx={{
-            width: 60,
-            height: 3,
-            backgroundColor: 'secondary.main',
-            borderRadius: 2,
-            mb: 5,
-          }}
-        />
-
         {/* Events List */}
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 2,
-            mb: 4,
-          }}
-        >
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, mb: 5 }}>
           {events.map((event, index) => (
             <motion.div
               key={event.title}
-              initial={{ opacity: 0, x: -30 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              initial={{ opacity: 0, y: 16 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
             >
               <Card
+                component="a"
+                href="/activities"
                 sx={{
                   display: 'flex',
-                  gap: 2,
-                  p: 2,
-                  borderLeft: `3px solid ${
-                    event.color === 'primary'
-                      ? theme.palette.primary.main
-                      : event.color === 'secondary'
-                      ? theme.palette.secondary.main
-                      : '#1a3a5e'
-                  }`,
-                  transition: 'all 0.3s',
-                  cursor: 'pointer',
+                  alignItems: 'stretch',
+                  gap: { xs: 2, sm: 2.5 },
+                  p: { xs: 2, sm: 2.5 },
+                  textDecoration: 'none',
+                  transition: 'border-color 0.25s ease, box-shadow 0.25s ease',
                   '&:hover': {
-                    transform: 'translateX(8px)',
-                    boxShadow: theme.shadows[6],
+                    borderColor: 'rgba(43, 58, 108, 0.22)',
+                    boxShadow: '0 12px 32px rgba(12, 17, 36, 0.08)',
                   },
                 }}
               >
-                {/* Date Box */}
+                {/* Date */}
                 <Box
                   sx={{
-                    minWidth: 70,
-                    height: 70,
-                    backgroundColor:
-                      event.color === 'primary'
-                        ? 'primary.main'
-                        : event.color === 'secondary'
-                        ? 'secondary.main'
-                        : '#1a3a5e',
-                    borderRadius: 2,
+                    width: 68,
+                    flexShrink: 0,
+                    backgroundColor: 'rgba(43, 58, 108, 0.05)',
+                    borderTop: '3px solid',
+                    borderTopColor: 'secondary.main',
+                    borderRadius: '10px',
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    color: 'white',
+                    color: 'primary.main',
                   }}
                 >
-                  <Typography
-                    sx={{
-                      fontFamily: 'var(--font-playfair)',
-                      fontSize: '1.8rem',
-                      fontWeight: 700,
-                      lineHeight: 1,
-                    }}
-                  >
+                  <Typography variant="stat" sx={{ fontSize: '1.625rem' }}>
                     {event.day}
                   </Typography>
-                  <Typography
-                    variant="caption"
-                    sx={{
-                      fontSize: '0.7rem',
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.08em',
-                      opacity: 0.9,
-                    }}
-                  >
+                  <Typography variant="overline" sx={{ opacity: 0.85 }}>
                     {event.month}
                   </Typography>
                 </Box>
 
+                {/* Image (or a plain placeholder when none is set) */}
+                <Box
+                  sx={{
+                    width: { xs: 84, sm: 120 },
+                    flexShrink: 0,
+                    borderRadius: '10px',
+                    overflow: 'hidden',
+                    backgroundColor: 'rgba(43, 58, 108, 0.06)',
+                    display: event.image ? 'block' : 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  {event.image ? (
+                    <Box
+                      component="img"
+                      src={event.image}
+                      alt=""
+                      sx={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                    />
+                  ) : (
+                    <Groups sx={{ color: 'primary.main', opacity: 0.35, fontSize: '1.75rem' }} />
+                  )}
+                </Box>
+
                 {/* Event Info */}
-                <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                  <Typography
-                    variant="h6"
-                    sx={{
-                      fontWeight: 600,
-                      color: 'primary.main',
-                      mb: 0.5,
-                      fontSize: '1.05rem',
-                    }}
-                  >
-                    {event.title}
-                  </Typography>
+                <Box sx={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 0.75 }}>
                   <Box
                     sx={{
-                      display: 'flex',
-                      gap: 2,
-                      flexWrap: 'wrap',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: 0.75,
+                      alignSelf: 'flex-start',
+                      px: 1.25,
+                      py: 0.25,
+                      borderRadius: '30px',
+                      backgroundColor: 'rgba(43, 58, 108, 0.06)',
                     }}
                   >
+                    <Box sx={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: 'secondary.main' }} />
+                    <Typography variant="caption" sx={{ color: 'primary.main', fontWeight: 700 }}>
+                      {event.category}
+                    </Typography>
+                  </Box>
+
+                  <Typography variant="h6" sx={{ color: 'primary.main' }}>
+                    {event.title}
+                  </Typography>
+
+                  <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
                       <LocationOn sx={{ fontSize: '0.9rem', color: 'text.secondary' }} />
-                      <Typography variant="caption" sx={{ color: 'text.secondary', fontSize: '0.8rem' }}>
+                      <Typography variant="caption" sx={{ color: 'text.secondary' }}>
                         {event.location}
                       </Typography>
                     </Box>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
                       <Schedule sx={{ fontSize: '0.9rem', color: 'text.secondary' }} />
-                      <Typography variant="caption" sx={{ color: 'text.secondary', fontSize: '0.8rem' }}>
+                      <Typography variant="caption" sx={{ color: 'text.secondary' }}>
                         {event.time}
                       </Typography>
                     </Box>
                   </Box>
+                </Box>
+
+                {/* Affordance */}
+                <Box sx={{ display: { xs: 'none', sm: 'flex' }, alignItems: 'center', pl: 1 }}>
+                  <ArrowForward sx={{ color: 'text.secondary', fontSize: '1.125rem' }} />
                 </Box>
               </Card>
             </motion.div>
@@ -240,15 +199,9 @@ export default function EventsSection() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.6 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
         >
-          <Button
-            variant="contained"
-            color="secondary"
-            endIcon={<ArrowForward />}
-            href="/activities"
-            size="large"
-          >
+          <Button variant="contained" color="secondary" endIcon={<ArrowForward />} href="/activities" size="large">
             Full Events Calendar
           </Button>
         </motion.div>

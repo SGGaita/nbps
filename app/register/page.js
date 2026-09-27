@@ -14,6 +14,7 @@ import { PersonAdd, CheckCircle } from '@mui/icons-material';
 import { motion } from 'framer-motion';
 import { useTheme } from '@mui/material/styles';
 import Header from '../../components/Header';
+import PageHero from '../../components/PageHero';
 import Footer from '../../components/Footer';
 
 const graduationYears = Array.from({ length: 40 }, (_, i) => 2025 - i);
@@ -25,57 +26,12 @@ export default function RegisterPage() {
     <>
       <Header />
       
-      {/* Hero Section */}
-      <Box
-        sx={{
-          backgroundColor: 'primary.main',
-          color: 'white',
-          py: { xs: 6, md: 10 },
-          backgroundImage: 'url(https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1920&q=80)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          position: 'relative',
-          '&::before': {
-            content: '""',
-            position: 'absolute',
-            inset: 0,
-            backgroundColor: 'rgba(43, 58, 108, 0.92)',
-          },
-        }}
-      >
-        <Container maxWidth="md" sx={{ position: 'relative', textAlign: 'center' }}>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-          >
-            <PersonAdd sx={{ fontSize: '4rem', mb: 2, color: 'secondary.main' }} />
-            <Typography
-              variant="h1"
-              sx={{
-                fontFamily: 'var(--font-playfair)',
-                fontSize: { xs: '2.5rem', md: '3.5rem' },
-                fontWeight: 900,
-                mb: 2,
-              }}
-            >
-              Join the NBPS Alumni Family
-            </Typography>
-            <Typography
-              variant="h6"
-              sx={{
-                maxWidth: 600,
-                mx: 'auto',
-                opacity: 0.9,
-                fontWeight: 300,
-                lineHeight: 1.6,
-              }}
-            >
-              Register today to stay connected, attend events, and be part of our growing community
-            </Typography>
-          </motion.div>
-        </Container>
-      </Box>
+      <PageHero
+        eyebrow="Join Us"
+        title="Join the NBPS Alumni Family"
+        description="Register today to stay connected, attend events, and be part of our growing community"
+        image="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1920&q=80"
+      />
 
       {/* Registration Form */}
       <Box sx={{ py: { xs: 6, md: 10 }, backgroundColor: 'background.default' }}>
@@ -87,16 +43,13 @@ export default function RegisterPage() {
           >
             <Card
               sx={{
-                borderRadius: 4,
-                boxShadow: theme.shadows[8],
+                boxShadow: '0 12px 40px rgba(12, 17, 36, 0.08)',
               }}
             >
               <CardContent sx={{ p: { xs: 3, md: 5 } }}>
                 <Typography
                   variant="h4"
                   sx={{
-                    fontFamily: 'var(--font-playfair)',
-                    fontWeight: 700,
                     color: 'primary.main',
                     mb: 1,
                   }}
@@ -117,7 +70,6 @@ export default function RegisterPage() {
                 <Typography
                   variant="h6"
                   sx={{
-                    fontWeight: 600,
                     color: 'primary.main',
                     mb: 2,
                   }}
@@ -191,7 +143,6 @@ export default function RegisterPage() {
                 <Typography
                   variant="h6"
                   sx={{
-                    fontWeight: 600,
                     color: 'primary.main',
                     mb: 2,
                   }}
@@ -245,7 +196,6 @@ export default function RegisterPage() {
                 <Typography
                   variant="h6"
                   sx={{
-                    fontWeight: 600,
                     color: 'primary.main',
                     mb: 2,
                   }}
@@ -281,7 +231,6 @@ export default function RegisterPage() {
                 <Typography
                   variant="h6"
                   sx={{
-                    fontWeight: 600,
                     color: 'primary.main',
                     mb: 2,
                   }}
@@ -326,8 +275,6 @@ export default function RegisterPage() {
                   startIcon={<CheckCircle />}
                   sx={{
                     py: 1.75,
-                    fontSize: '1.1rem',
-                    fontWeight: 600,
                   }}
                 >
                   Complete Registration
@@ -353,8 +300,6 @@ export default function RegisterPage() {
             <Typography
               variant="h4"
               sx={{
-                fontFamily: 'var(--font-playfair)',
-                fontWeight: 700,
                 color: 'primary.main',
                 textAlign: 'center',
                 mb: 4,
@@ -414,7 +359,6 @@ export default function RegisterPage() {
                       <Typography
                         variant="h6"
                         sx={{
-                          fontWeight: 600,
                           color: 'primary.main',
                           mb: 1,
                         }}
@@ -425,7 +369,6 @@ export default function RegisterPage() {
                         variant="body2"
                         sx={{
                           color: 'text.secondary',
-                          lineHeight: 1.6,
                         }}
                       >
                         {benefit.description}

@@ -1,5 +1,15 @@
 import { createTheme } from '@mui/material/styles';
 
+// Font stacks. The CSS variables are declared by next/font in app/layout.js.
+export const HEADING = 'var(--font-heading), "Segoe UI", "Helvetica Neue", Arial, sans-serif';
+export const BODY = 'var(--font-body), "Segoe UI", "Helvetica Neue", Arial, sans-serif';
+
+// Deep neutral navy used for photo shading (hero, page banners, dark bands). Use as `rgba(${SHADE}, a)`.
+export const SHADE = '12, 17, 36';
+
+const { breakpoints } = createTheme();
+const up = (key) => breakpoints.up(key);
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -24,45 +34,117 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: '"DM Sans", "Roboto", "Helvetica", "Arial", sans-serif',
+    // Body family (Lato). Headings, buttons and brand marks use HEADING (Montserrat).
+    fontFamily: BODY,
+    fontWeightLight: 400, // Lato is loaded at 400/700 only
+    fontWeightRegular: 400,
+    fontWeightMedium: 700,
+    fontWeightBold: 700,
+
+    // ── Headings ── Montserrat, sizes step down ~1.25× and scale up at md
     h1: {
-      fontFamily: '"Playfair Display", serif',
-      fontWeight: 900,
-      fontSize: '3.5rem',
-      lineHeight: 1.1,
+      fontFamily: HEADING,
+      fontWeight: 800,
+      fontSize: '2.25rem',   // 36px mobile
+      lineHeight: 1.15,
+      letterSpacing: '-0.02em',
+      [up('sm')]: { fontSize: '2.75rem' },
+      [up('md')]: { fontSize: '3.5rem' }, // 56px desktop
     },
     h2: {
-      fontFamily: '"Playfair Display", serif',
-      fontWeight: 700,
-      fontSize: '2.5rem',
+      fontFamily: HEADING,
+      fontWeight: 800,
+      fontSize: '1.875rem',  // 30px
       lineHeight: 1.2,
+      letterSpacing: '-0.015em',
+      [up('md')]: { fontSize: '2.5rem' }, // 40px
     },
     h3: {
-      fontFamily: '"Playfair Display", serif',
+      fontFamily: HEADING,
       fontWeight: 700,
-      fontSize: '2rem',
-      lineHeight: 1.3,
+      fontSize: '1.5rem',    // 24px
+      lineHeight: 1.25,
+      letterSpacing: '-0.01em',
+      [up('md')]: { fontSize: '1.875rem' }, // 30px
     },
     h4: {
-      fontFamily: '"Playfair Display", serif',
+      fontFamily: HEADING,
       fontWeight: 700,
-      fontSize: '1.5rem',
+      fontSize: '1.3125rem', // 21px
+      lineHeight: 1.3,
+      letterSpacing: '-0.005em',
+      [up('md')]: { fontSize: '1.5rem' }, // 24px
     },
     h5: {
-      fontWeight: 600,
-      fontSize: '1.25rem',
+      fontFamily: HEADING,
+      fontWeight: 700,
+      fontSize: '1.125rem',  // 18px
+      lineHeight: 1.35,
+      [up('md')]: { fontSize: '1.25rem' }, // 20px
     },
     h6: {
+      fontFamily: HEADING,
       fontWeight: 600,
-      fontSize: '1rem',
+      fontSize: '1rem',      // 16px
+      lineHeight: 1.4,
+    },
+
+    // ── Supporting text ── Lato
+    subtitle1: {             // lead / intro paragraph under page titles
+      fontFamily: BODY,
+      fontWeight: 400,
+      fontSize: '1.125rem',
+      lineHeight: 1.6,
+      [up('md')]: { fontSize: '1.25rem' },
+    },
+    subtitle2: {             // small emphasised label
+      fontFamily: BODY,
+      fontWeight: 700,
+      fontSize: '0.9375rem',
+      lineHeight: 1.5,
     },
     body1: {
-      fontSize: '1rem',
+      fontFamily: BODY,
+      fontSize: '1rem',      // 16px
       lineHeight: 1.7,
     },
     body2: {
-      fontSize: '0.875rem',
+      fontFamily: BODY,
+      fontSize: '0.875rem',  // 14px
       lineHeight: 1.6,
+    },
+    button: {
+      fontFamily: HEADING,
+      fontWeight: 600,
+      fontSize: '0.875rem',
+      lineHeight: 1.5,
+      letterSpacing: '0.01em',
+      textTransform: 'none',
+    },
+    caption: {               // meta info: dates, locations, fine print
+      fontFamily: BODY,
+      fontSize: '0.8125rem', // 13px
+      lineHeight: 1.5,
+      letterSpacing: '0.01em',
+    },
+    overline: {              // eyebrows, tags, stat labels, footer column titles
+      fontFamily: BODY,
+      fontWeight: 700,
+      fontSize: '0.75rem',   // 12px
+      lineHeight: 1.5,
+      letterSpacing: '0.12em',
+      textTransform: 'uppercase',
+    },
+
+    // ── Custom variant ── big numbers (stats, dates, amounts)
+    stat: {
+      fontFamily: HEADING,
+      fontWeight: 800,
+      fontSize: '2rem',
+      lineHeight: 1,
+      letterSpacing: '-0.02em',
+      fontVariantNumeric: 'tabular-nums',
+      [up('md')]: { fontSize: '2.25rem' },
     },
   },
   shape: {
@@ -96,34 +178,72 @@ const theme = createTheme({
     '0 24px 100px rgba(43, 58, 108, 0.56)',
   ],
   components: {
-    MuiButton: {
-      styleOverrides: {
-        root: {
-          textTransform: 'none',
-          fontWeight: 600,
-          borderRadius: 30,
-          padding: '10px 24px',
-          transition: 'all 0.3s ease',
-        },
-        contained: {
-          boxShadow: '0 4px 14px rgba(251, 188, 4, 0.3)',
-          '&:hover': {
-            boxShadow: '0 6px 20px rgba(251, 188, 4, 0.4)',
-            transform: 'translateY(-2px)',
-          },
+    MuiTypography: {
+      defaultProps: {
+        variantMapping: {
+          subtitle1: 'p',
+          subtitle2: 'p',
+          overline: 'span',
+          stat: 'p',
         },
       },
     },
-    MuiCard: {
+    MuiChip: {
       styleOverrides: {
         root: {
-          borderRadius: 16,
-          transition: 'all 0.3s ease',
-          '&:hover': {
-            transform: 'translateY(-4px)',
-            boxShadow: '0 8px 32px rgba(43, 58, 108, 0.2)',
-          },
+          fontFamily: BODY,
+          fontWeight: 700,
+          letterSpacing: '0.02em',
         },
+        sizeSmall: {
+          fontSize: '0.75rem',
+        },
+      },
+    },
+    // Calm, flat buttons: no glow, no lift - colour change only on hover.
+    MuiButton: {
+      defaultProps: {
+        disableElevation: true,
+      },
+      styleOverrides: {
+        sizeLarge: {
+          fontSize: '1rem',
+          padding: '12px 28px',
+        },
+        root: {
+          borderRadius: 30,
+          padding: '10px 24px',
+          boxShadow: 'none',
+          transition: 'background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease',
+          '&:hover': { boxShadow: 'none' },
+        },
+        outlined: {
+          borderWidth: 1,
+        },
+      },
+    },
+    // Flat cards with a hairline border. Clickable cards add their own soft hover shadow.
+    MuiCard: {
+      defaultProps: {
+        elevation: 0,
+      },
+      styleOverrides: {
+        root: {
+          borderRadius: 12,
+          border: '1px solid rgba(43, 58, 108, 0.1)',
+          transition: 'border-color 0.25s ease, box-shadow 0.25s ease',
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        rounded: { borderRadius: 12 },
+      },
+    },
+    MuiLinearProgress: {
+      styleOverrides: {
+        root: { height: 6, borderRadius: 3, backgroundColor: 'rgba(43, 58, 108, 0.08)' },
+        bar: { borderRadius: 3 },
       },
     },
     MuiAppBar: {

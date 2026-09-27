@@ -21,6 +21,7 @@ import {
 import { motion } from 'framer-motion';
 import { useTheme } from '@mui/material/styles';
 import Header from '../../components/Header';
+import PageHero from '../../components/PageHero';
 import Footer from '../../components/Footer';
 
 const documents = [
@@ -70,11 +71,11 @@ const faqs = [
   },
   {
     question: 'How do I update my contact information?',
-    answer: 'Log into your alumni profile on our website or send an email to info@nbpsalumni.co.ke with your updated details.',
+    answer: 'Log into your alumni profile on our website or send an email to alumninbps@gmail.com with your updated details.',
   },
   {
     question: 'Can I access welfare support if I\'m facing hardship?',
-    answer: 'Yes, our welfare program is designed to support alumni in times of need. Contact the welfare committee confidentially through welfare@nbpsalumni.co.ke.',
+    answer: 'Yes, our welfare program is designed to support alumni in times of need. Contact the welfare committee confidentially through alumninbps@gmail.com.',
   },
   {
     question: 'How often are alumni events held?',
@@ -89,54 +90,12 @@ export default function ResourcesPage() {
     <>
       <Header />
       
-      {/* Hero Section */}
-      <Box
-        sx={{
-          backgroundColor: 'primary.main',
-          color: 'white',
-          py: { xs: 8, md: 12 },
-          backgroundImage: 'url(https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=1920&q=80)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          position: 'relative',
-          '&::before': {
-            content: '""',
-            position: 'absolute',
-            inset: 0,
-            backgroundColor: 'rgba(43, 58, 108, 0.92)',
-          },
-        }}
-      >
-        <Container maxWidth="lg" sx={{ position: 'relative' }}>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-          >
-            <Typography
-              variant="h1"
-              sx={{
-                fontFamily: 'var(--font-playfair)',
-                fontSize: { xs: '2.5rem', md: '4rem' },
-                fontWeight: 900,
-                mb: 2,
-              }}
-            >
-              Resources
-            </Typography>
-            <Typography
-              variant="h5"
-              sx={{
-                maxWidth: 600,
-                opacity: 0.9,
-                fontWeight: 300,
-              }}
-            >
-              Documents, videos, and helpful information for our alumni community
-            </Typography>
-          </motion.div>
-        </Container>
-      </Box>
+      <PageHero
+        eyebrow="Alumni Resources"
+        title="Resources"
+        description="Documents, videos, and helpful information for our alumni community"
+        image="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=1920&q=80"
+      />
 
       {/* Documents Section */}
       <Box sx={{ py: { xs: 6, md: 10 }, backgroundColor: 'background.default' }}>
@@ -150,9 +109,6 @@ export default function ResourcesPage() {
             <Typography
               variant="h2"
               sx={{
-                fontFamily: 'var(--font-playfair)',
-                fontSize: { xs: '2rem', md: '2.5rem' },
-                fontWeight: 900,
                 color: 'primary.main',
                 mb: 4,
               }}
@@ -188,11 +144,11 @@ export default function ResourcesPage() {
                       alignItems: 'center',
                       gap: 2,
                       p: 2.5,
-                      transition: 'all 0.3s',
+                      transition: 'border-color 0.25s ease, box-shadow 0.25s ease',
                       cursor: 'pointer',
                       '&:hover': {
-                        transform: 'translateY(-4px)',
-                        boxShadow: theme.shadows[6],
+                        borderColor: 'rgba(43, 58, 108, 0.22)',
+                        boxShadow: '0 12px 32px rgba(12, 17, 36, 0.08)',
                       },
                     }}
                   >
@@ -212,9 +168,8 @@ export default function ResourcesPage() {
                     </Box>
                     <Box sx={{ flex: 1 }}>
                       <Typography
-                        variant="subtitle1"
+                        variant="h6"
                         sx={{
-                          fontWeight: 600,
                           color: 'primary.main',
                           mb: 0.25,
                         }}
@@ -225,7 +180,6 @@ export default function ResourcesPage() {
                         variant="caption"
                         sx={{
                           color: 'text.secondary',
-                          fontSize: '0.75rem',
                         }}
                       >
                         {doc.type} • {doc.size}
@@ -259,9 +213,6 @@ export default function ResourcesPage() {
             <Typography
               variant="h2"
               sx={{
-                fontFamily: 'var(--font-playfair)',
-                fontSize: { xs: '2rem', md: '2.5rem' },
-                fontWeight: 900,
                 color: 'primary.main',
                 mb: 4,
               }}
@@ -292,10 +243,10 @@ export default function ResourcesPage() {
                 <Card
                   sx={{
                     cursor: 'pointer',
-                    transition: 'all 0.3s',
+                    transition: 'border-color 0.25s ease, box-shadow 0.25s ease',
                     '&:hover': {
-                      transform: 'translateY(-8px)',
-                      boxShadow: theme.shadows[8],
+                      borderColor: 'rgba(43, 58, 108, 0.22)',
+                      boxShadow: '0 12px 32px rgba(12, 17, 36, 0.08)',
                     },
                   }}
                 >
@@ -341,8 +292,9 @@ export default function ResourcesPage() {
                         px: 1,
                         py: 0.5,
                         borderRadius: 1,
-                        fontSize: '0.75rem',
-                        fontWeight: 600,
+                        typography: 'caption',
+                        fontWeight: 700,
+                        fontVariantNumeric: 'tabular-nums',
                       }}
                     >
                       {video.duration}
@@ -350,9 +302,8 @@ export default function ResourcesPage() {
                   </Box>
                   <CardContent>
                     <Typography
-                      variant="subtitle1"
+                      variant="h6"
                       sx={{
-                        fontWeight: 600,
                         color: 'primary.main',
                       }}
                     >
@@ -378,9 +329,6 @@ export default function ResourcesPage() {
             <Typography
               variant="h2"
               sx={{
-                fontFamily: 'var(--font-playfair)',
-                fontSize: { xs: '2rem', md: '2.5rem' },
-                fontWeight: 900,
                 color: 'primary.main',
                 mb: 4,
               }}
@@ -414,11 +362,11 @@ export default function ResourcesPage() {
                     alignItems: 'center',
                     gap: 2,
                     p: 2,
-                    transition: 'all 0.3s',
+                    transition: 'border-color 0.25s ease, box-shadow 0.25s ease',
                     cursor: 'pointer',
                     '&:hover': {
-                      transform: 'translateX(8px)',
-                      boxShadow: theme.shadows[4],
+                      borderColor: 'rgba(43, 58, 108, 0.22)',
+                      boxShadow: '0 12px 32px rgba(12, 17, 36, 0.08)',
                     },
                   }}
                   component="a"
@@ -442,7 +390,7 @@ export default function ResourcesPage() {
                   <Typography
                     variant="body1"
                     sx={{
-                      fontWeight: 500,
+                      fontWeight: 700,
                       color: 'primary.main',
                     }}
                   >
@@ -467,9 +415,6 @@ export default function ResourcesPage() {
             <Typography
               variant="h2"
               sx={{
-                fontFamily: 'var(--font-playfair)',
-                fontSize: { xs: '2rem', md: '2.5rem' },
-                fontWeight: 900,
                 color: 'primary.main',
                 mb: 1,
                 textAlign: 'center',
@@ -503,7 +448,9 @@ export default function ResourcesPage() {
                   '&:before': {
                     display: 'none',
                   },
-                  boxShadow: theme.shadows[2],
+                  boxShadow: 'none',
+                  border: '1px solid rgba(43, 58, 108, 0.1)',
+                  borderRadius: '12px !important',
                 }}
               >
                 <AccordionSummary
@@ -515,9 +462,8 @@ export default function ResourcesPage() {
                   }}
                 >
                   <Typography
-                    variant="subtitle1"
+                    variant="h6"
                     sx={{
-                      fontWeight: 600,
                       color: 'primary.main',
                     }}
                   >
@@ -529,7 +475,6 @@ export default function ResourcesPage() {
                     variant="body2"
                     sx={{
                       color: 'text.secondary',
-                      lineHeight: 1.7,
                     }}
                   >
                     {faq.answer}
