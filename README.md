@@ -2,7 +2,7 @@
 
 A modern, professional Next.js website for the Nyandarua Boarding Primary School Alumni Association.
 
-## 🎨 Features
+## Features
 
 - **Modern Design**: Clean, professional UI with smooth animations using Framer Motion
 - **Material-UI Components**: Built with MUI for consistent, accessible components
@@ -13,7 +13,7 @@ A modern, professional Next.js website for the Nyandarua Boarding Primary School
 - **Smooth Animations**: Page transitions and scroll animations
 - **Multiple Pages**: Home, About, Projects, Activities, Gallery, Resources, Donate, Register
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -39,7 +39,7 @@ npm run dev
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 nbps-alumni/
@@ -68,7 +68,7 @@ nbps-alumni/
 └── package.json
 ```
 
-## 🎨 Design System
+## Design System
 
 ### Colors
 - **Primary (Blue)**: #2b3a6c
@@ -87,7 +87,7 @@ nbps-alumni/
 - Framer Motion for animations
 - Professional stock images from Unsplash
 
-## 📄 Pages
+## Pages
 
 1. **Home** - Hero slider, about preview, projects, events, CTA
 2. **About** - Mission, vision, values, leadership team
@@ -98,7 +98,7 @@ nbps-alumni/
 7. **Donate** - Donation form with payment options
 8. **Register** - Alumni registration form
 
-## 🛠️ Technologies
+## Technologies
 
 - **Framework**: Next.js 16 (App Router)
 - **UI Library**: Material-UI (MUI) v6
@@ -108,7 +108,7 @@ nbps-alumni/
 - **Fonts**: Google Fonts (DM Sans, Playfair Display, DM Mono)
 - **Images**: Unsplash stock photos
 
-## 📦 Build
+## Build
 
 To create a production build:
 
@@ -122,7 +122,7 @@ To start the production server:
 npm start
 ```
 
-## 🌐 Deployment
+## Deployment
 
 This Next.js app can be deployed to:
 - Vercel (recommended)
@@ -134,7 +134,7 @@ For Vercel deployment:
 vercel
 ```
 
-## 📝 Notes
+## Notes
 
 - No TypeScript - pure JavaScript
 - No Tailwind CSS - MUI only
@@ -142,10 +142,3 @@ vercel
 - Professional stock images replace emoji icons
 - Smooth animations throughout
 - Clean, modern, professional design
-
-## 👥 Contact
-
-NBPS Alumni Association
-- Email: info@nbpsalumni.co.ke
-- Phone: +254 700 000 000
-- Location: Nyandarua County, Kenya
